@@ -1,5 +1,3 @@
-# File: ml/reinforcement/dqn_agent.py
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -48,5 +46,3 @@ class DQNAgent:
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
-
-# You would need to create a wrapper to use this DQNAgent with the game's Strategy interface
