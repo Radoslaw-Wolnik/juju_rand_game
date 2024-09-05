@@ -50,3 +50,33 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# C++ ignores
+cpp/build/
+*.o
+*.out
+
+# Rust ignores
+rust/target/
+Cargo.lock
+
+# Python ignores
+__pycache__/
+*.py[cod]
+*.so
+
+# Editor-specific ignores
+.vscode/
+.idea/
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+
+# Data and logs
+data/simulation_results/*.json
+*.log
+
+# Dependencies
+node_modules/
