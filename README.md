@@ -1,144 +1,136 @@
 # Dice Game Analysis Project
 
-This project provides a comprehensive framework for analyzing a dice-based board game through simulation, strategy evaluation, and performance optimization.
+This project provides a comprehensive framework for analyzing a dice-based board game through simulation, strategy evaluation, and performance optimization. It includes implementations in both C++ and Rust, along with Python scripts for visualization and a web interface.
 
-## New Features
+## Table of Contents
 
-1. **Unified Strategy Interface**: Common interface for strategies in both C++ and Rust.
-2. **Machine Learning Integration**: Reinforcement learning with DQN for strategy optimization.
-3. **Parallelization**: Distributed computing for large-scale simulations using MPI.
-4. **Visualization Tools**: Python-based tools for visualizing game states, strategy performance, and tournament results.
-5. **Dynamic Strategy Adaptation**: Adaptive meta-strategy that learns from performance metrics.
-6. **Game Theory Analysis**: Comprehensive analysis including Nash Equilibrium, dominating strategies, and evolutionary stability.
-7. **Web Interface**: Flask-based web application for interactive gameplay and analysis.
+1. [Project Structure](#project-structure)
+2. [Game Rules](#game-rules)
+3. [Implementations](#implementations)
+4. [Building and Running](#building-and-running)
+5. [Strategies](#strategies)
+6. [Simulation](#simulation)
+7. [Machine Learning](#machine-learning)
+8. [Python Scripts](#python-scripts)
+9. [Web Interface](#web-interface)
+10. [Contributing](#contributing)
+11. [License](#license)
 
 ## Project Structure
 
 ```
-shut-the-box-game/
-│
-├── common/
-│   ├── strategies/
-│   │   ├── strategy_interface.hpp
-│   │   ├── strategy_interface.rs
-│   │   ├── adaptive_strategy.hpp
-│   │   └── adaptive_strategy.rs
-│
+dice-game-analysis/
 ├── cpp/
-│   └── ... (existing C++ implementation)
-│
+│   ├── src/
+│   ├── include/
+│   ├── ml/
+│   ├── simulation/
+│   └── CMakeLists.txt
 ├── rust/
-│   └── ... (existing Rust implementation)
-│
-├── simulation/
-│   ├── parallel/
-│   │   ├── distributed_simulator.cpp
-│   │   └── distributed_simulator.rs
-│
-├── visualization/
-│   ├── game_visualizer.py
-│   ├── strategy_analyzer.py
-│   └── tournament_visualizer.py
-│
-├── ml/
-│   └── reinforcement/
-│       └── dqn_agent.py
-│
-├── verification/
-│   └── game_rules_verification.v
-│
-├── web/
+│   ├── src/
+│   └── Cargo.toml
+├── python/
+│   ├── cli.py
 │   ├── app.py
-│   └── templates/
-│       └── index.html
-│
-├── analysis/
-│   └── game_theory/
-│       └── comprehensive_analysis.py
-│
-├── .github/
-│   └── workflows/
-│       ├── ci_cpp.yml
-│       └── ci_rust.yml
-│
-└── README.md (this file)
+│   ├── tournament.py
+│   └── visualizations.py
+├── common/
+│   └── strategy_interface.hpp
+├── templates/
+│   └── index.html
+├── requirements.txt
+└── README.md
 ```
 
-## Installation and Setup
+## Game Rules
 
-[Provide instructions for setting up the project, including dependencies]
+The game is played on a 12-bit board with two variants:
 
-## Usage
+1. **Base Game**: Players try to turn off as many bits as possible in 5 rounds. The player with the lower total score wins.
+2. **Extended Game**: One player tries to turn off all bits, while the other tries to turn them all on. The first to achieve their goal wins.
 
-### Running Simulations
+## Implementations
+
+- C++: Provides high-performance simulations with various optimization levels.
+- Rust: Offers a clean, safe implementation with good performance.
+- Python: Used for visualization, web interface, and machine learning integration.
+
+## Building and Running
+
+### C++
 
 ```bash
-# C++ version
-cd cpp && make && ./dice_game_simulator
-
-# Rust version
-cd rust && cargo run --release
-
-# Distributed simulation
-mpirun -np 4 ./distributed_simulator
+cd cpp
+mkdir build && cd build
+cmake ..
+make
+./dice_game_simulator
 ```
 
-### Web Interface
+### Rust
 
 ```bash
-cd web
-flask run
+cd rust
+cargo run --release
+```
+
+### Python
+
+```bash
+pip install -r requirements.txt
+python python/cli.py
+```
+
+## Strategies
+
+1. Random
+2. HighestValue
+3. HighestProbability
+4. BalancedValue
+5. Adaptive
+6. LookAhead
+7. ScoreManagement
+8. RiskAverse
+9. Aggressive
+10. PatternRecognition
+
+## Simulation
+
+The project supports various simulation modes:
+
+- Single-threaded
+- Multi-threaded
+- Distributed (using MPI)
+
+To run a distributed simulation:
+
+```bash
+mpirun -np 4 ./dice_game_simulator
+```
+
+## Machine Learning
+
+The project includes a Deep Q-Network (DQN) agent for reinforcement learning:
+
+```bash
+python python/train_dqn.py
+```
+
+## Python Scripts
+
+- `cli.py`: Command-line interface for running simulations
+- `tournament.py`: Runs a tournament between different strategies
+- `visualizations.py`: Creates visualizations of game states and strategy performance
+
+## Web Interface
+
+A Flask-based web interface is provided for interactive gameplay and analysis:
+
+```bash
+python python/app.py
 ```
 
 Then open a web browser and navigate to `http://localhost:5000`.
-
-### Visualization
-
-```bash
-python visualization/game_visualizer.py
-python visualization/strategy_analyzer.py
-python visualization/tournament_visualizer.py
-```
-
-### Machine Learning
-
-```bash
-python ml/reinforcement/train_dqn.py
-```
-
-### Game Theory Analysis
-
-```bash
-python analysis/game_theory/comprehensive_analysis.py
-```
-
-## Documentation
-
-### Unified Strategy Interface
-
-The unified strategy interface allows for consistent strategy implementation across C++ and Rust. It defines the following methods:
-
-- `choose_move(game_state)`: Selects the next move based on the current game state.
-- `name()`: Returns the name of the strategy.
-- `description()`: Provides a brief description of the strategy.
-
-### Parallelization
-
-The distributed simulator uses MPI to parallelize game simulations across multiple processes. This allows for significantly faster large-scale simulations.
-
-### Dynamic Strategy Adaptation
-
-The adaptive strategy maintains a collection of other strategies and dynamically adjusts the probability of choosing each strategy based on their performance. It considers both win rate and average score, adapting every 100 games.
-
-### Game Theory Analysis
-
-The game theory analyzer provides the following functionalities:
-
-- Nash Equilibrium calculation
-- Identification of dominating strategies
-- Best response strategy calculation
-- Visualization of payoff matrices
-- Evolutionary stable strategy simulation
 
 ## Contributing
 
@@ -146,4 +138,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## License
 
-This project is licensed under the [specify your license] - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
