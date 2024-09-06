@@ -9,3 +9,9 @@ mpi = "0.6"
 lto = "fat"
 codegen-units = 1
 panic = "abort"
+
+[lib]
+path = "src/lib.rs"
+
+# Include the common directory
+include = ["src/**/*", "common/**/*"]

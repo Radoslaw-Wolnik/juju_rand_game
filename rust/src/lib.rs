@@ -5,6 +5,7 @@ pub mod strategies;
 pub mod tournament;
 pub mod simulation;
 pub mod rng;
+pub mod common;
 
 pub use game::{GameMode, OptimizationLevel};
 pub use strategies::Strategy;
