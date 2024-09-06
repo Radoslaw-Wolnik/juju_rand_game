@@ -1,4 +1,3 @@
-
 # File: python/visualizations.py
 
 import matplotlib.pyplot as plt
