@@ -129,3 +129,7 @@ For the game implementations, you would need to update the `UltraFastGame` and `
 To use the distributed simulator, you'll need to compile with MPI support and run using mpirun or mpiexec. For example:
 mpic++ -std=c++17 -O3 *.cpp -o dice_game_simulator
 mpirun -np 4 ./dice_game_simulator
+
+
+mpic++ -std=c++17 -O3 *.cpp -o dice_game_simulator
+mpirun -np 4 ./dice_game_simulator
