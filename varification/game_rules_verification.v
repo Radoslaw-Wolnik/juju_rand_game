@@ -4,6 +4,7 @@ Require Import Coq.Init.Nat.
 Require Import Coq.Lists.List.
 Import ListNotations.
 
+
 (* Define the game state *)
 Record GameState := mkGameState {
   board: nat;
@@ -42,4 +43,49 @@ Proof.
   - apply Nat.pow_pos_nonneg; auto with arith.
 Qed.
 
-(* More theorems and proofs would follow... *)
+
+(* Define what it means for a board state to be valid *)
+Definition is_valid_board (b: nat) : Prop :=
+  b <= 0xFFF.
+
+(* Theorem: apply_move preserves board validity *)
+Theorem apply_move_preserves_validity:
+  forall state move,
+    is_valid_board (board state) ->
+    is_valid_move state move ->
+    is_valid_board (board (apply_move state move)).
+Proof.
+  (* Proof goes here *)
+Admitted.
+
+(* Define game termination *)
+Inductive game_terminated : GameState -> Prop :=
+  | game_over : forall s,
+      board s = 0 \/ round s = 5 ->
+      game_terminated s.
+
+(* Theorem: The game always terminates *)
+Theorem game_always_terminates:
+  forall initial_state,
+    exists n, forall state,
+      n_moves initial_state state n ->
+      game_terminated state.
+Proof.
+  (* Proof goes here *)
+Admitted.
+
+(* Define score calculation *)
+Definition calculate_score (b: nat) : nat :=
+  (* Implementation of score calculation *)
+  0. (* Placeholder *)
+
+(* Theorem: Score is always non-negative and bounded *)
+Theorem score_properties:
+  forall state,
+    0 <= calculate_score (board state) <= 78.
+Proof.
+  (* Proof goes here *)
+Admitted.
+
+
+(* More theorems and proofs... *)
